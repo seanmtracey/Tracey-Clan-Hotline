@@ -1,0 +1,13 @@
+<h1>{{title}}</h1>
+
+<h3>Add Users</h3>
+
+<form method="POST" action="/admin/add-user">
+    <input type="text" placeholder="Name" name="name"/>
+    <input type="password" placeholder="Password" name="password" />
+    <input type="submit" value="Create User" />
+</form>
+
+{{#each users}}
+    <li>{{this}}</li>
+{{/each}}
