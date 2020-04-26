@@ -1,4 +1,4 @@
-const debug = require('debug')("routes:index");
+const debug = require('debug')("routes:users");
 const express = require('express');
 const router = express.Router();
 
