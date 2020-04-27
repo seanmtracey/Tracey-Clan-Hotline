@@ -8,6 +8,17 @@
     <input type="submit" value="Create User" />
 </form>
 
+<h3>Existing Users</h3>
+
+<ul>
 {{#each users}}
-    <li>{{this}}</li>
+    <li>
+        <p>{{this.name}}</p>
+        <form method="POST" action="/user/update/{{this.uuid}}">
+            <input type="text" placeholder="Name" name="name"/>
+            <input type="password" placeholder="Password" name="password" />
+            <input type="submit" value="Update Details" />
+        </form>
+    </li>
 {{/each}}
+</ul>
