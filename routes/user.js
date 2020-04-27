@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const admin_auth = require(`${__dirname}/../bin/lib/admin_auth`);
+const uuid = require('uuid/v4');
 
 const saltRounds = process.env.SALT_ROUNDS || 10;
 
@@ -66,6 +67,41 @@ router.post(`/update/:UUID(${UUIDRegex})`, (req, res, next) => {
 
 		})
 	;
+
+});
+
+router.post(`/add`, [admin_auth], (req, res, next) => {
+
+	if(req.body.name && req.body.password){
+
+		bcrypt.hash(req.body.password, saltRounds)
+			.then(passwordHash => {
+
+				const userData = {
+					name : req.body.name,
+					password : passwordHash,
+					uuid : uuid()
+				};
+
+				users.add(userData)
+					.then(result => {
+						debug(result);
+						res.redirect('/admin');
+					})
+					.catch(err => {
+						debug(err);
+						res.status(500);
+						next();
+					})
+				;
+
+			})
+		;
+
+	} else {
+		res.status(422);
+		next();
+	}
 
 });
 

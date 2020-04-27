@@ -2,10 +2,10 @@
 
 <h3>Add Users</h3>
 
-<form method="POST" action="/admin/add-user">
+<form method="POST" action="/user/add">
     <input type="text" placeholder="Name" name="name"/>
     <input type="password" placeholder="Password" name="password" />
-    <input type="submit" value="Create User" />
+    <input type="submit" value="Create" />
 </form>
 
 <h3>Existing Users</h3>
@@ -17,7 +17,7 @@
         <form method="POST" action="/user/update/{{this.uuid}}">
             <input type="text" placeholder="Name" name="name"/>
             <input type="password" placeholder="Password" name="password" />
-            <input type="submit" value="Update Details" />
+            <input type="submit" value="Update" />
         </form>
     </li>
 {{/each}}

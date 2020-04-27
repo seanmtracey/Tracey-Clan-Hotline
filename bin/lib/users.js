@@ -36,7 +36,14 @@ function getSpecificUser(uuid){
 
 }
 
-function addUserToDatabase(){
+function addUserToDatabase(userData){
+
+    return database.add(userData, process.env.DEFAULT_DB_NAME)
+        .catch(err => {
+            debug(err);
+            throw err;
+        })
+    ;
 
 }
 
