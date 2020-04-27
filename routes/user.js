@@ -105,4 +105,20 @@ router.post(`/add`, [admin_auth], (req, res, next) => {
 
 });
 
+router.post(`/delete/:UUID(${UUIDRegex})`, (req, res, next) => {
+
+	users.delete(req.params.UUID)
+		.then(result => {
+			debug(result);
+			res.redirect('/admin');
+		})
+		.catch(err => {
+			debug(err);
+			res.status(500);
+			next();
+		})
+	;
+
+});
+
 module.exports = router;

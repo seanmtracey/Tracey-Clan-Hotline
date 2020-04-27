@@ -19,6 +19,9 @@
             <input type="password" placeholder="Password" name="password" />
             <input type="submit" value="Update" />
         </form>
+        <form method="POST" action="/user/delete/{{this.uuid}}">
+            <input type="submit" value="Delete" class="delete"/>
+        </form>
     </li>
 {{/each}}
 </ul>

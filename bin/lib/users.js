@@ -9,7 +9,7 @@ function getListOfUsers(){
                     "$exists": true
                 }
             }
-        }, process.env.DEFAULT_DB_NAME)
+        }, process.env.USERS_DATABASE_NAME)
         .then(results => {
             debug(results);
             return results;
@@ -28,7 +28,7 @@ function getSpecificUser(uuid){
             "selector" : {
                 "uuid" : uuid
             }
-        }, process.env.DEFAULT_DB_NAME)
+        }, process.env.USERS_DATABASE_NAME)
         .then(documents => {
             return documents[0];
         })    
@@ -38,7 +38,7 @@ function getSpecificUser(uuid){
 
 function addUserToDatabase(userData){
 
-    return database.add(userData, process.env.DEFAULT_DB_NAME)
+    return database.add(userData, process.env.USERS_DATABASE_NAME)
         .catch(err => {
             debug(err);
             throw err;
@@ -47,7 +47,17 @@ function addUserToDatabase(userData){
 
 }
 
-function deleteUserFromDatabase(){
+function deleteUserFromDatabase(uuid){
+
+    return getSpecificUser(uuid)
+        .then(user => {
+            return database.delete(user._id, user._rev, process.env.USERS_DATABASE_NAME);
+        })
+        .catch(err => {
+            debug('err:', err);
+            throw error;
+        })
+    ;
 
 }
 
@@ -65,9 +75,9 @@ function updateUserInDatabase(uuid, newData){
             });
 
             debug('updated user data:', userData);
-            debug(process.env.DEFAULT_DB_NAME);
+            debug(process.env.USERS_DATABASE_NAME);
 
-            return database.update(userData, process.env.DEFAULT_DB_NAME);
+            return database.update(userData, process.env.USERS_DATABASE_NAME);
 
         })
         .catch(err => {
