@@ -4,10 +4,14 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cookieSession = require('cookie-session');
 
 const app = express();
 
 const admin_auth = require(`${__dirname}/bin/lib/admin_auth`);
+const checkSession = require(`${__dirname}/bin/lib/check-session`);
+
+app.enable('trust proxy');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,9 +23,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(cookieSession({
+	name: 'phone-home',
+	secret : process.env.SESSION_SECRET,
+	maxAge: 12 * 60 * 60 * 1000, // 12 hours
+	secure : process.env.NODE_ENV === "production"
+}));
+
 app.use('/', require('./routes/index'));
-app.use('/call', require('./routes/call'));
+app.use('/call', [checkSession], require('./routes/call'));
 app.use('/user', require('./routes/user'));
+app.use('/account', require('./routes/account'));
 app.use('/admin', [admin_auth], require('./routes/admin'));
 
 // catch 404 and forward to error handler

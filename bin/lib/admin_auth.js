@@ -20,7 +20,10 @@ function check (name, pass) {
 
 // Create server
 function checkCreds(req, res, next) {
-  
+	
+	console.log("CREDS BEING CHECKED", req.path);
+	process.exit();
+
 	const credentials = auth(req);
 	console.log(credentials);
   if (!credentials || !check(credentials.name, credentials.pass)) {

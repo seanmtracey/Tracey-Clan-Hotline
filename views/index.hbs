@@ -1,10 +1,13 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<header>
+    <h1>Tracey Clan Hotline</h1>
+    <em>for phoning home</em>
+</header>
 
-<script src="/socket.io/socket.io.js"></script>
-<script>
-    
-    const socket = io.connect( window.location.origin );
-    socket.emit('data', { hello : 'world' });
 
-</script>
+<form method="POST" action="/account/login">
+    <div class="bottom">
+        <input type="text" name="name" placeholder="Name" />
+        <input type="password" name="password" placeholder="Password" />
+    </div>
+    <input type="submit" value="Login" />
+</form>

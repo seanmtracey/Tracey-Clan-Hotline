@@ -17,10 +17,10 @@
         <form method="POST" action="/user/update/{{this.uuid}}">
             <input type="text" placeholder="Name" name="name"/>
             <input type="password" placeholder="Password" name="password" />
-            <input type="submit" value="Update" />
+            <input type="submit" value="Update" class="adminBtn" />
         </form>
         <form method="POST" action="/user/delete/{{this.uuid}}">
-            <input type="submit" value="Delete" class="delete"/>
+            <input type="submit" value="Delete" class="delete adminBtn"/>
         </form>
     </li>
 {{/each}}
