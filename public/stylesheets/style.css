@@ -6,19 +6,28 @@ body{
 
 html, body{
   font-display: swap;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Open Sans", Helvetica, Arial, sans-serif;
   margin: 0px;
   background-attachment: scroll;
   background-repeat: repeat-y;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
   font-weight: 400;
 }
 
+h1, h2, h3, h4, h5, h6{
+  font-family: 'Amiri', serif;
+}
+
 body{
-  height: auto;
+  height: 100%;
   padding: 1em;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 a {
@@ -57,11 +66,11 @@ ul li p{
 form input[type="text"], form input[type="password"] {
   font-size: 1em;
   border: 1px solid #8a8a8a;
-  padding: 0.3em;
+  padding: 0.5em;
   border-radius: 3px;
 }
 
-form input[type="submit"]{
+form input[type="submit"].adminBtn{
   -webkit-appearance: none;
   padding: 0.3em 0.5em;
   background: #00a1ff;
@@ -76,4 +85,33 @@ form input[type="submit"]{
 form input[type="submit"].delete{
   background: #ef5353;
   border: 1px solid red;
+}
+
+header{
+  margin-bottom: 1em;
+}
+
+header h1{
+  font-size: 3.5em;
+  margin-bottom: 0;
+  line-height: 1em;
+}
+
+header em{
+  font-size: 1.5em;
+  font-weight: 200;
+}
+
+form input[type="submit"]{
+  background: transparent;
+  color: black;
+  text-shadow: none;
+  border: 1px solid black;
+  font-size: 1.2em;
+  padding: 0.5em 2em;
+  border-radius: 3px;
+}
+
+.bottom{
+  margin-bottom: 1em;
 }

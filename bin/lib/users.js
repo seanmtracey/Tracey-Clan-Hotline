@@ -22,11 +22,25 @@ function getListOfUsers(){
 
 }
 
-function getSpecificUser(uuid){
+function getSpecificUserById(uuid){
 
     return database.query({
             "selector" : {
                 "uuid" : uuid
+            }
+        }, process.env.USERS_DATABASE_NAME)
+        .then(documents => {
+            return documents[0];
+        })    
+    ;
+
+}
+
+function getSpecificUserByName(name){
+
+    return database.query({
+            "selector" : {
+                "name" : name
             }
         }, process.env.USERS_DATABASE_NAME)
         .then(documents => {
@@ -49,7 +63,7 @@ function addUserToDatabase(userData){
 
 function deleteUserFromDatabase(uuid){
 
-    return getSpecificUser(uuid)
+    return getSpecificUserById(uuid)
         .then(user => {
             return database.delete(user._id, user._rev, process.env.USERS_DATABASE_NAME);
         })
@@ -64,8 +78,8 @@ function deleteUserFromDatabase(uuid){
 function updateUserInDatabase(uuid, newData){
 
     debug(uuid, newData);
-
-    return getSpecificUser(uuid)
+    
+    return getSpecificUserById(uuid)
         .then(userData => {
 
             debug(userData);
@@ -90,7 +104,10 @@ function updateUserInDatabase(uuid, newData){
 
 module.exports = {
     list : getListOfUsers,
-    get : getSpecificUser,
+    get : {
+       byID : getSpecificUserById,
+       byName : getSpecificUserByName
+    },
     add : addUserToDatabase,
     delete : deleteUserFromDatabase,
     update : updateUserInDatabase
