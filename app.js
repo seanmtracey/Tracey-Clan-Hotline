@@ -9,6 +9,9 @@ const cookieSession = require('cookie-session');
 const app = express();
 
 const admin_auth = require(`${__dirname}/bin/lib/admin_auth`);
+const checkSession = require(`${__dirname}/bin/lib/check-session`);
+
+app.enable('trust proxy');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,7 +31,7 @@ app.use(cookieSession({
 }));
 
 app.use('/', require('./routes/index'));
-app.use('/call', require('./routes/call'));
+app.use('/call', [checkSession], require('./routes/call'));
 app.use('/user', require('./routes/user'));
 app.use('/account', require('./routes/account'));
 app.use('/admin', [admin_auth], require('./routes/admin'));

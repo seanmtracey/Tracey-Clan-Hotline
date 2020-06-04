@@ -1,3 +1,39 @@
-<!--<iframe src="https://tokbox.com/embed/embed/ot-embed.js?embedId=39b8b6bd-816f-4872-a28a-5b314b28dd81&room=DEFAULT_ROOM&iframe=true" width="800px" height="640px" scrolling="auto" allow="microphone; camera" ></iframe>-->
+<!--<iframe id="callFrame" src="https://tokbox.com/embed/embed/ot-embed.js?embedId=39b8b6bd-816f-4872-a28a-5b314b28dd81&room={{room}}&iframe=true" width="800px" height="640px" scrolling="auto" allow="microphone; camera" ></iframe>-->
 
-<iframe src="https://tokbox.com/embed/embed/ot-embed.js?embedId=39b8b6bd-816f-4872-a28a-5b314b28dd81&room={{room}}&iframe=true" width="800px" height="640px" scrolling="auto" allow="microphone; camera" ></iframe>
+<div id="otEmbedContainer"></div> 
+
+<script src="https://tokbox.com/embed/embed/ot-embed.js?embedId=39b8b6bd-816f-4872-a28a-5b314b28dd81&room=DEFAULT_ROOM"></script>
+
+<script>
+    (function(){
+
+        'use strict';
+
+        let firstClick = true;
+
+        function setCallEndHandler(){
+
+            var endCallButton = document.querySelector('#otEmbedContainer .Embed-main #controls #end');
+            console.log(endCallButton);
+            if(endCallButton){
+                document.addEventListener('click', function(){
+                    console.log('CLICK');
+
+                    if(firstClick){
+                        firstClick = false;
+                    } else {
+                        window.location.href = "/directory";
+                    }
+
+                }, false);
+            } else {
+                setTimeout(setCallEndHandler);
+            }
+
+        }
+
+        setTimeout(setCallEndHandler, 500);
+
+
+    }());
+</script>

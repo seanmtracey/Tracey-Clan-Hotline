@@ -31,7 +31,9 @@ router.post('/login', (req, res, next) => {
 					console.log('Matching?', match);
 
 					if(match){
+						req.session = {};
 						req.session.user = req.body.name;
+						debug('account req.session:', req.session);
 						res.redirect('/directory');
 					} else {
 						res.status(401);
