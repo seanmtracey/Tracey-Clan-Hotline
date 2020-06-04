@@ -12,7 +12,8 @@ router.get('/', (req, res, next) => {
             
             res.render('admin', { 
                 title : 'Manage Users',
-                users : list 
+                users : list,
+                bodyid : 'admin'
             });
 
         })

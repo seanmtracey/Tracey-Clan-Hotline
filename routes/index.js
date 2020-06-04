@@ -7,4 +7,8 @@ router.get('/', (req, res, next) => {
 	res.render('index', { title: 'Express' });
 });
 
+router.get('/directory', (req, res, next) => {
+	res.render('directory', { title: 'Directory', user: req.session.user, bodyid: "directory" });
+});
+
 module.exports = router;

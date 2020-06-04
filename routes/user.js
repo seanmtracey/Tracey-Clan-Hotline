@@ -148,7 +148,7 @@ router.post('/login', (req, res, next) => {
 
 					if(match){
 						req.session.user = req.body.name;
-						res.redirect('/call');
+						res.redirect('/directory');
 					} else {
 						res.status(401);
 						res.redirect('/');
