@@ -1,10 +1,4 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
-
-<script src="/socket.io/socket.io.js"></script>
-<script>
-    
-    const socket = io.connect( window.location.origin );
-    socket.emit('data', { hello : 'world' });
-
-</script>
+<form method="POST" action="/login">
+    <input type="text" name="name" placeholder="name" />
+    <input type="password" name="password" placeholder="password" />
+</form>
