@@ -22,7 +22,6 @@ function check (name, pass) {
 function checkCreds(req, res, next) {
 	
 	console.log("CREDS BEING CHECKED", req.path);
-	process.exit();
 
 	const credentials = auth(req);
 	console.log(credentials);
