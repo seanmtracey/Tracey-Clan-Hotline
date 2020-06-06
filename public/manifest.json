@@ -1,0 +1,13 @@
+{
+    "name": "Tracey Clan Hotline",
+    "short_name": "Hotline",
+    "icons": [{
+          "src": "assets/images/app_icon.png",
+          "sizes": "300x300"
+        }],
+    "start_url": "./",
+    "display": "standalone",
+    "gcm_sender_id": "261147283239",
+    "background_color" : "#333333",
+    "theme_color" : "#FFF1E5"
+  }

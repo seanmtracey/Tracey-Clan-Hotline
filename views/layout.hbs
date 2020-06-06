@@ -1,13 +1,103 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
-  </head>
-  <body id="{{bodyid}}">
-    {{{body}}}
-  </body>
+	<head>
+		<title>{{title}}</title>
+		<link rel='stylesheet' href='/stylesheets/style.css' />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
+		<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet" />
+		<link rel="manifest" href="/manifest.json">
+	</head>
+	<body id="{{bodyid}}">
+		{{{body}}}
+
+		<script>
+			if ('serviceWorker' in navigator) {
+
+				function urlBase64ToUint8Array(base64String) {
+					const padding = '='.repeat((4 - base64String.length % 4) % 4);
+					const base64 = (base64String + padding)
+						.replace(/-/g, '+')
+						.replace(/_/g, '/');
+					
+					const rawData = window.atob(base64);
+					const outputArray = new Uint8Array(rawData.length);
+					
+					for (let i = 0; i < rawData.length; ++i) {
+						outputArray[i] = rawData.charCodeAt(i);
+					}
+					return outputArray;
+				}
+				
+				navigator.serviceWorker.register('./service-worker.js')
+					.then(function(e){
+						console.log('Service worker registered', e);
+
+						navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) { 
+						
+						serviceWorkerRegistration.pushManager.getSubscription()
+							.then(function(pushSubscription){
+								
+								console.log(pushSubscription);
+
+								if(!pushSubscription){
+									/*
+									serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly: true})
+										.then(function(subscription) {
+											console.log(subscription);
+										})
+										.catch(function(err) {
+											console.log('err:', err);
+											if (Notification.permission === 'denied') {
+												console.log('denied');
+											} else {
+												console.log(err);
+												
+											}
+										})
+									;*/
+
+									fetch('/notifications/get-public-key', {
+											credentials: 'include'
+										})
+										.then(res => {
+											if(res.ok){
+												return res.json();
+											} else {
+												throw res
+											}
+										})
+										.then(response => {
+											console.log(response);
+	
+											return serviceWorkerRegistration.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: urlBase64ToUint8Array(response.data)})
+
+										})
+										.then(subscription => {
+											console.log(subscription);
+										})
+										.catch(err => {
+											console.log(err)
+										})
+									;
+
+								} else {
+									
+									console.log("We're subscribed for push notifications");
+									console.log(pushSubscription);
+		
+								
+								}
+
+							})
+						;
+
+					});
+
+					})
+				;
+
+			}
+		</script>
+	</body>
 </html>

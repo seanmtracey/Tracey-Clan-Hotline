@@ -35,6 +35,7 @@ app.use('/call', [checkSession], require('./routes/call'));
 app.use('/user', require('./routes/user'));
 app.use('/account', require('./routes/account'));
 app.use('/admin', [admin_auth], require('./routes/admin'));
+app.use('/notifications', [checkSession], require('./routes/notifications'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
