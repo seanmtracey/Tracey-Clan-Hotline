@@ -1,0 +1,16 @@
+{
+    "name": "Tracey Clan Hotline",
+    "short_name": "Tracey Clan",
+    "theme_color": "#CCF5AC",
+    "background_color": "#FFFFFF",
+    "display": "standalone",
+    "orientation": "any",
+    "scope": "/",
+    "start_url": "/directory",
+    "icons": [
+        {
+            "src": "assets/images/app_icon.png",
+            "sizes": "500x500"
+        }
+    ]
+}
