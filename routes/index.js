@@ -6,8 +6,15 @@ const checkSession = require(`${__dirname}/../bin/lib/check-session`);
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
+	
 	debug('index req.session:', req.session);
-	res.render('index', { title: 'Express' });
+
+	if(req.session.user){
+		res.redirect('/directory');
+	} else {
+		res.render('index', { title: 'Login' });
+	}
+
 });
 
 router.get('/directory', [checkSession], (req, res, next) => {

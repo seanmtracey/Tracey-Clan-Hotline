@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieSession({
 	name: 'phone-home',
 	secret : process.env.SESSION_SECRET,
-	maxAge: 12 * 60 * 60 * 1000, // 12 hours
+	maxAge: (24 * 60 * 60 * 1000) * 90, // 90 Days
 	secure : process.env.NODE_ENV === "production"
 }));
 
