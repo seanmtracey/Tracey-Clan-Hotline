@@ -6,8 +6,27 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+	<link rel="manifest" href="/manifest.json">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="apple-touch-icon-precomposed" href="/assets/images/icon.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/images/icon.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/images/icon.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/images/icon.png" />
+	
+	<meta name="theme-color" content="#CCF5AC">
+  
   </head>
   <body id="{{bodyid}}">
     {{{body}}}
+
+	<script>
+
+		navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+			console.log('ServiceWorker registration successful with scope: ', registration.scope);
+		})
+
+	</script>
   </body>
 </html>
