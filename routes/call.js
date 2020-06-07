@@ -11,9 +11,12 @@ router.get('/:ROOM_ID', (req, res, next) => {
     .then(data => {
       debug(data);
 
-      const SMS_MSG = `Mum has started a video call with you on the Tracey Clan Hotline.\n\nTo join the call go to:\n\nhttps://tracey-clan-hotline.eu-gb.mybluemix.net/call/${req.params.ROOM_ID}`
 
-      sendText(SMS_MSG, data.number);
+      if(req.session.user === "Mum"){
+        const SMS_MSG = `Mum has started a video call with you on the Tracey Clan Hotline.\n\nTo join the call go to:\n\nhttps://tracey-clan-hotline.eu-gb.mybluemix.net/call/${req.params.ROOM_ID}`;
+        sendText(SMS_MSG, data.number);
+      }
+
       
       res.render('call', { 
         title: `Call with ${req.params.ROOM_ID}` 
