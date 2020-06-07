@@ -5,8 +5,8 @@ const Nexmo = require('nexmo');
 
 const nexmo = new Nexmo({
     apiKey: process.env.NEXMO_API_KEY,
-    apiSecret: process.env.API_SECRET,
-    applicationId: process.env.APP_ID
+    apiSecret: process.env.NEXMO_API_SECRET,
+    applicationId: process.env.NEXMO_APP_ID
   }, { debug : true });
 
 function sendMessage(message, recipient){
