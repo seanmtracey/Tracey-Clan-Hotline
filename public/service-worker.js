@@ -22,7 +22,7 @@ self.addEventListener('fetch', function(event) {
 					var fetchPromise = fetch(event.request)
 						.then(function(networkResponse) {
 
-							if(event.request.method === 'GET'){
+							if(event.request.method === 'GET' && networkResponse.ok){
 
 								var shouldCache = true;
 

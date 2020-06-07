@@ -2,6 +2,14 @@
 
 <div id="otEmbedContainer"></div> 
 
+<div id="userControls" data-active="false">
+
+    <div id="endCall">
+        End Call
+    </div>
+    
+</div>
+
 <script src="https://tokbox.com/embed/embed/ot-embed.js?embedId=39b8b6bd-816f-4872-a28a-5b314b28dd81&room=DEFAULT_ROOM"></script>
 
 <script>
@@ -9,30 +17,38 @@
 
         'use strict';
 
-        let firstClick = true;
+        var startCallButton = null;
 
-        function setCallEndHandler(){
+        var userControls = document.querySelector('#userControls');
+        var userEndCallBtn = document.querySelector('#endCall');
 
-            var endCallButton = document.querySelector('#otEmbedContainer .Embed-main #controls #end');
-            console.log(endCallButton);
-            if(endCallButton){
-                endCallButton.addEventListener('click', function(){
-                    console.log('CLICK');
+        userEndCallBtn.addEventListener('click', function(){
 
-                    if(firstClick){
-                        firstClick = false;
-                    } else {
-                        window.location.href = "/directory";
-                    }
+            window.location.href = "/directory";
 
-                }, false);
+        }, false);
+
+        function detectStartBtn(){
+            
+            startCallButton = document.querySelector('.Embed .Embed-main #start-mask #start')
+
+            console.log(startCallButton);
+
+            if(startCallButton === null){
+
+                setTimeout(detectStartBtn, 100);
+                
             } else {
-                setTimeout(setCallEndHandler);
+
+                startCallButton.addEventListener('click', function(){
+                    userControls.dataset.active = "true";
+                }, false);
+
             }
 
         }
 
-        setTimeout(setCallEndHandler, 500);
+        setTimeout(detectStartBtn, 100);
 
 
     }());

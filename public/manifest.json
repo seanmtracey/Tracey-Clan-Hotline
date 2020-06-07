@@ -6,7 +6,7 @@
     "display": "standalone",
     "orientation": "any",
     "scope": "/",
-    "start_url": "/directory",
+    "start_url": "/",
     "icons": [
         {
             "src": "assets/images/app_icon.png",

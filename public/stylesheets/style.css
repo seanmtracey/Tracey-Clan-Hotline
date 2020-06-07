@@ -1,3 +1,7 @@
+*[data-active="false"]{
+  display: none !important;
+}
+
 body{
   background-image: url('/assets/images/background.jpg');
   background-size: cover;
@@ -162,4 +166,29 @@ form input[type="submit"]{
 .Embed-mask .message.button {
   border: 1px solid black;
   font-weight: 800;
+}
+
+#otEmbedContainer .Embed-main #controls{
+  display: none;
+}
+
+#userControls{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: black;
+  padding: 1em;
+  color: white;
+  box-sizing: border-box;
+}
+
+#userControls #endCall{
+  display: inline-block;
+  background: #c12d2d;
+  padding: 0.5em 1em;
+  border-radius: 2px;
+  font-weight: 600;
+  text-shadow: 0 1px 1px black;
+  z-index:2;
 }
